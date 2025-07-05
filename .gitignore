@@ -19,9 +19,6 @@ turbo/
 # Packed tarballs
 *.tgz
 
-# Local-only documentation (kept out of VCS)
-local-documents/
-
 # OS miscellany
 .DS_Store
 Thumbs.db
@@ -29,3 +26,9 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# turbo
+.turbo
+
+# local-docs
+local-documents/

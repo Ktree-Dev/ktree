@@ -23,3 +23,6 @@ export function sleep(ms: number): Promise<void> {
 
 // Re-export config utilities
 export * from "./config";
+
+// Re-export database models
+export * from "./models";

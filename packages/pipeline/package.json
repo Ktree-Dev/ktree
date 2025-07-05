@@ -1,0 +1,31 @@
+{
+  "name": "@ktree/pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ktree local processing pipeline (summarisation, tree builder, ontology, etc.)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "jest"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "drizzle-orm": "^0.32.0",
+    "openai": "^4.70.0",
+    "@anthropic-ai/sdk": "^0.30.0",
+    "@google/generative-ai": "^0.24.1",
+    "tree-sitter": "^0.25.0",
+    "tree-sitter-typescript": "^0.23.2",
+    "tree-sitter-python": "^0.23.6"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
