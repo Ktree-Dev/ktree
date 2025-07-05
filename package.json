@@ -1,0 +1,23 @@
+{
+  "name": "ktree-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Monorepo for Ktree (CLI, pipeline, web UI, shared packages)",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "apps": [
+      "apps/*"
+    ]
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "ts-jest": "^29.4.0",
+    "turbo": "^1.13.0"
+  }
+}
