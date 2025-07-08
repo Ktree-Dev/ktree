@@ -4,3 +4,4 @@
  */
 
 export * from "./Directory";
+export * from "./Topic";

@@ -119,7 +119,7 @@ async function handler(argv: InitArgs): Promise<void> {
         name: "embedder",
         message: "Select embedding model:",
         choices: [
-          { title: "google/textembedding-gecko-002", value: "google/textembedding-gecko-002" },
+          { title: "gemini/textembedding-gecko-002", value: "gemini/textembedding-gecko-002" },
           { title: "multilingual-e5-large-instruct", value: "multilingual-e5-large-instruct" },
           { title: "cohere/embed-v4-large", value: "cohere/embed-v4-large" },
         ],

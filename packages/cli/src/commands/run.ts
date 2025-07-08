@@ -2,7 +2,7 @@ import { CommandModule } from "yargs";
 import { resolve } from "node:path";
 import { existsSync } from "node:fs";
 import { loadConfig } from "@ktree/common";
-import { DirectoryTreeService } from "@ktree/pipeline";
+import { DirectoryTreeService, buildOntology, validateOntologyResults } from "@ktree/pipeline";
 import { scanAndSummarizeFiles } from "../utils/fileScanner";
 import { estimatePipelineCost, promptCostConfirmation } from "../utils/costEstimator";
 
@@ -94,9 +94,44 @@ async function runLocalPipeline(repoPath: string): Promise<void> {
   const tree = await treeService.buildTree(fileRecords);
   console.log("   Directory tree built successfully");
   
-  // Stage 3: Ontology Extraction (KTR-33) - Future
-  console.log("\n Stage 3: Ontology Extraction (coming soon)");
-  console.log("   Ontology extraction - placeholder");
+  // Stage 3: Ontology Extraction (KTR-33)
+  console.log("\n🧠 Stage 3: Ontology Extraction");
+  
+  // Transform records to match OntologyService interface
+  const ontologyFileRecords = fileRecords.map(record => ({
+    id: record.id,
+    path: record.path,
+    name: record.name,
+    summary: record.summary
+  }));
+  
+  const allDirectories = await treeService.getDirectoryTree();
+  const ontologyDirectoryRecords = allDirectories.map(dir => ({
+    id: dir.id,
+    path: dir.path,
+    summary: dir.summary || "Directory summary",
+    fileCount: dir.fileCount || 0,
+    loc: dir.loc || 0
+  }));
+  
+  try {
+    const ontologyResult = await buildOntology(cacheDir, ontologyFileRecords, ontologyDirectoryRecords);
+    
+    // Validate results
+    const validation = validateOntologyResults(ontologyResult);
+    if (validation.passed) {
+      console.log("   ✅ Ontology extraction completed successfully");
+      console.log(`      📊 ${ontologyResult.persistence.topicCount} topics, ${ontologyResult.persistence.linkCount} links`);
+      console.log(`      📈 Coverage: ${ontologyResult.persistence.coveragePercentage}%`);
+      console.log(`      🤖 LLM calls: ${ontologyResult.llmCallCount}`);
+    } else {
+      console.log("   ⚠️  Ontology extraction completed with issues:");
+      validation.issues.forEach(issue => console.log(`      - ${issue}`));
+    }
+  } catch (error) {
+    console.warn("   ⚠️  Ontology extraction failed:", error instanceof Error ? error.message : error);
+    console.log("   📝 Pipeline will continue without ontology data");
+  }
   
   const duration = (Date.now() - startTime) / 1000;
   console.log(`\n  Total pipeline time: ${duration.toFixed(2)}s`);
