@@ -60,7 +60,6 @@ export async function buildOntology(
   const startTime = Date.now();
   let llmCallCount = 0;
 
-  console.log("🧠 Stage 3: Ontology Extraction");
   console.log(`   Building ontology for ${fileRecords.length} files and ${directoryRecords.length} directories...`);
 
   try {

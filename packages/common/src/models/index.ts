@@ -4,4 +4,5 @@
  */
 
 export * from "./Directory";
+export * from "./Embedding";
 export * from "./Topic";

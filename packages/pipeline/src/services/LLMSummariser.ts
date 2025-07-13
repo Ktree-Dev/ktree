@@ -1,8 +1,8 @@
 import OpenAI from "openai";
 import Anthropic from "@anthropic-ai/sdk";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
-import { loadConfig, getApiKey, getModel } from "@ktree/common/src/config";
-import { FileSummary } from "@ktree/common/src/types/ChunkResult";
+import { loadConfig, getApiKey, getModel } from "@ktree/common";
+import { FileSummary } from "@ktree/common";
 
 // ---------------------------------------------------------------------------
 // JSON Schema for structured output (OpenAI/Anthropic format)

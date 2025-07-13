@@ -1,12 +1,11 @@
 import { readFileSync, existsSync, mkdirSync } from "node:fs";
-import { join, extname } from "node:path";
+import { join, extname, dirname } from "node:path";
 import { createHash } from "node:crypto";
-import { homedir, tmpdir } from "node:os";
 import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { eq } from "drizzle-orm";
-import { FileSummary, ChunkResult } from "@ktree/common/src/types/ChunkResult";
+import { FileSummary, ChunkResult } from "@ktree/common";
 import { chunkFileAST } from "./treeChunker";
 import { summariseChunk } from "./LLMSummariser";
 
@@ -19,9 +18,10 @@ const summaryCache = sqliteTable("summary_cache", {
   json: text("json").notNull(),
 });
 
-const DEFAULT_CACHE_DIR = join(homedir(), ".ktree", "cache");
-const MODEL_VERSION = "2025-07"; // bump when summariser prompt/model changes
-const CHUNK_LOC_TARGET = 300;
+// Always create .ktree in the current working directory where ktree is run
+const DEFAULT_CACHE_DIR = join(process.cwd(), ".ktree", "cache");
+const MODEL_VERSION = "2025-07-11-02"; // bump when summariser prompt/model changes
+const CHUNK_LOC_TARGET = 250;
 
 /** Ensure cache directory & DB exist, return Drizzle instance */
 function initCache(cacheDir = DEFAULT_CACHE_DIR) {
@@ -110,7 +110,12 @@ export async function summariseFile(
     loc: content.split("\n").length,
   };
 
-  const result: ChunkResult = { hash, language, summary: merged };
+  const result: ChunkResult = { hash, language, summary: merged, path: filePath };
+
+  
+  console.log(`STORING: ${filePath}`);
+  console.log(`RESULT:`, JSON.stringify(result, null, 2));
+  
 
   await db.insert(summaryCache).values({
     hash,

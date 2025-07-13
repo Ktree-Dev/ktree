@@ -2,7 +2,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import * as os from "node:os";
 import { summariseFile } from "../src/services/FileSummarisationService";
-import { FileSummary } from "@ktree/common/src/types/ChunkResult";
+import { FileSummary } from "@ktree/common";
 import { jest } from "@jest/globals";
 
 // Mock dependencies

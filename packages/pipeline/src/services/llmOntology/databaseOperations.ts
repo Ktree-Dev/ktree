@@ -9,7 +9,7 @@ import {
   type TopicNodeLink, 
   type NewTopicNodeLink,
   type DomainDiscoveryResult
-} from "@ktree/common/src/models/Topic";
+} from "@ktree/common";
 import { type SubtopicStructure } from "./subtopicLabeler";
 import { type AssignmentResult } from "./topicAssigner";
 

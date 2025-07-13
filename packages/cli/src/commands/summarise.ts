@@ -1,5 +1,5 @@
-import { summariseFile } from "@ktree/pipeline/src/services/FileSummarisationService";
-import { loadConfig } from "@ktree/common/src/config";
+import { summariseFile } from "@ktree/pipeline";
+import { loadConfig } from "@ktree/common";
 import chalk from "chalk";
 import * as fs from "node:fs";
 import * as path from "node:path";

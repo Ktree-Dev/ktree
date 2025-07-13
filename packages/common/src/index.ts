@@ -26,3 +26,6 @@ export * from "./config";
 
 // Re-export database models
 export * from "./models";
+
+// Re-export types
+export * from "./types/ChunkResult";

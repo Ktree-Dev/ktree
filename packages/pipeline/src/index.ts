@@ -14,6 +14,7 @@ export {
   exportOntologyStructure 
 } from "./services/llmOntology/OntologyService";
 export { EmbeddingGateway } from "./services/mcp/EmbeddingGateway";
+export { VectorSimilarityService } from "./services/vector";
 
 export type { FileRecord } from "./services/DirectoryTreeService";
 export type { 

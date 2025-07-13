@@ -66,8 +66,12 @@ export async function scanAndSummarizeFiles(
         summary: {
           loc: result.summary.loc,
           title: result.summary.title,
-          summary: result.summary.summary
-        }
+          summary: result.summary.summary,
+          // Preserve the full ChunkResult as a stringified field
+          hash: result.hash,
+          functions: result.summary.functions,
+          classes: result.summary.classes
+        } as any
       };
       
       fileRecords.push(fileRecord);

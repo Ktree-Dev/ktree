@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import Anthropic from "@anthropic-ai/sdk";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import { loadConfig, getApiKey, getModel } from "@ktree/common";
-import { type DomainDiscoveryResult } from "@ktree/common/src/models/Topic";
+import { type DomainDiscoveryResult } from "@ktree/common";
 
 // ---------------------------------------------------------------------------
 // JSON Schema for domain discovery (OpenAI/Anthropic format)

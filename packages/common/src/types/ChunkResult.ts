@@ -41,4 +41,5 @@ export interface ChunkResult {
   hash: string;          // sha256(fileContent + modelVersion)
   language: string;      // e.g. "typescript"
   summary: FileSummary;
+  path?: string;         // optional file path for context display
 }

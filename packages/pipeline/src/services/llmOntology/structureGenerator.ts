@@ -1,5 +1,5 @@
 import { EmbeddingGateway, type EmbeddingResult } from "../mcp/EmbeddingGateway";
-import { type DomainDiscoveryResult, type SubtopicGroupingResult } from "@ktree/common/src/models/Topic";
+import { type DomainDiscoveryResult, type SubtopicGroupingResult } from "@ktree/common";
 
 /**
  * Structure generator for ontology clustering

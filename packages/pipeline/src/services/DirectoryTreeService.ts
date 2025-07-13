@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { eq, isNull } from "drizzle-orm";
-import { directories, DirectoryTreeNode, type Directory, type NewDirectory } from "@ktree/common/src/models";
+import { directories, DirectoryTreeNode, type Directory, type NewDirectory } from "@ktree/common";
 import { summariseChunk } from "./LLMSummariser";
 
 export interface DirectoryTreeOptions {

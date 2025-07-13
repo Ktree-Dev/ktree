@@ -134,13 +134,13 @@ describe("run command", () => {
       expect.stringContaining(" ktree pipeline starting for:")
     );
     expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining(" Stage 1: File Summarization")
+      expect.stringContaining("Stage 1: File Summarization")
     );
     expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("🌲 Stage 2: Directory Tree Building")
+      expect.stringContaining("Stage 2: Directory Tree Building")
     );
     expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("🧠 Stage 3: Ontology Extraction")
+      expect.stringContaining("Stage 3: Ontology Extraction")
     );
     expect(consoleSpy).toHaveBeenCalledWith(
       expect.stringContaining("Pipeline completed successfully!")

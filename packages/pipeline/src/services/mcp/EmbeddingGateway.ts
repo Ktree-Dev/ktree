@@ -1,4 +1,5 @@
 import { getApiKey, getModel } from "@ktree/common";
+import { VectorSimilarityService } from "../vector";
 
 /**
  * Embedding provider types supported by EmbeddingGateway
@@ -31,11 +32,13 @@ export class EmbeddingGateway {
   private provider: EmbeddingProvider;
   private model: string;
   private cache: Map<string, number[]> = new Map();
+  private vectorService?: VectorSimilarityService;
 
-  constructor() {
+  constructor(vectorService?: VectorSimilarityService) {
     const embeddingModel = getModel("embedder");
     this.provider = embeddingModel.split("/")[0] as EmbeddingProvider;
     this.model = embeddingModel.replace(`${this.provider}/`, "");
+    this.vectorService = vectorService;
   }
 
   /**
@@ -57,6 +60,23 @@ export class EmbeddingGateway {
     
     // Cache the result
     this.cache.set(cacheKey, result.vector);
+    
+    return result;
+  }
+
+  /**
+   * Generate embedding for text and auto-persist to vector service
+   * @param text - Text to embed
+   * @param nodeId - ID to associate with the embedding (file, directory, etc.)
+   */
+  async generateAndSaveEmbedding(text: string, nodeId: string): Promise<EmbeddingResult> {
+    const result = await this.generateEmbedding(text);
+    
+    // Auto-persist to vector service if configured
+    if (this.vectorService) {
+      const vector = new Float32Array(result.vector);
+      await this.vectorService.saveEmbedding(nodeId, vector, result.model);
+    }
     
     return result;
   }
